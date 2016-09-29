@@ -1,3 +1,6 @@
 [submodule "bbt"]
 	path = bbt
 	url = https://github.com/brochette/bbt
+[submodule "sharedcontrol"]
+	path = sharedcontrol
+	url = https://github.com/andrewramsay/mgsharedcontrol
