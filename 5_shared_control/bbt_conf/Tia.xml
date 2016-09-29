@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<unit name="Tia" class="TiaUnit" type="GenericUnit" xml="">
+    <!-- TiaUnit implements a TiA client that connects to a signal server and gets signal streams
+      
+			Signal server provides a set of signals, each of them configured with one Type ID (string value).
+			The following table sets the correspondence between Type IDs and Numerical values:
+				_______		_______________
+				Type ID		Numerical value
+				_______		_______________
+				eeg 		1
+				emg 		2
+				eog 		4
+				ecg 		8
+				hr			16
+				bp			32
+				button		64
+				axis		128
+				user_1		65536
+				user_2		131072
+				user_3		262144
+				user_4		524288
+				___________________________
+
+			- sigserverPort is the port (in localhost) of the signal server
+			
+			- sigserverType is an int vector (numerical values) declaring the Type ID of data from the signal server
+				- note the above correspondence between Type ID and numerical values
+				- e.g., a numerical value of 1 corresponds to eeg signal
+			
+			- outputSignal is a string vector declaring the signal stream IDs where to put the data from the signal server
+				- the properties of each signal stream (channels, blockSize, and sampling rate) must match with the ones of the signal server
+
+			This example gets the EEG signal from signal server and mades it available to the architecture
+			as a signal stream with ID=STREAM_EEG	
+      -->
+    <parameter name="sigserverAddress"      type="Bzi::BziString"       value="127.0.0.1"/>
+	<parameter name="sigserverPort" 		type="Bzi::BziInt" 			value="9000"/>
+	<parameter name="sigserverType" 		type="Bzi::BziIntVector" 	value="[256 65536]"/>
+	
+	<parameter name="outputSignal" 			type="Bzi::BziStringVector" value="[STREAM_1 STREAM_2]"/>
+	
+	<output name="STREAM_1" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</output>
+	<output name="STREAM_2" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</output>
+</unit>

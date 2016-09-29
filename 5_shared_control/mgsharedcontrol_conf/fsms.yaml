@@ -1,0 +1,38 @@
+### FSM format
+### state_machine:
+###  initial: <initial_state>
+### events:
+###     <event_name>:
+###            src: <source_state>
+###            dst: <destination_state>
+###            [after: <event string to generate after transition>]
+###            [before: <event to generate before transition>]
+### [state_callbacks:]
+###         <state>:
+###             [enter:  <event string to generate on enter state]
+###             [exit:  <event string to generate on enter state]
+###             [reenter: <event string to generate on re-entering state]
+            
+
+hand:
+    initial: not_grasping
+
+    events:
+        grasp: 
+            src: not_grasping
+            dst: grasping
+            after: fes_grasp
+
+        release:
+            src: grasping
+            dst: not_grasping
+            after: fes_release
+
+    mappings:
+        fes_grasp: 100
+        fes_release: 101
+        fes_disable: 102
+
+    state_callbacks:            
+        not_grasping:
+            enter: fes_disable

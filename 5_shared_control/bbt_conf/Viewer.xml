@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<unit name="Viewer" class="ViewerUnit" type="DisplayUnit" xml="">
+    <!-- ViewerUnit allows the real-time visualization of signal streams and events
+      
+			- visSignalNames declares the signals to visualize
+			- visMarkerNames declares the events to visualize
+			- visScales defines the y scale of each signal
+			- visWindowSecs defines the x scale of each signal (in seconds)
+				
+		the number of elements in visSignalNames, visScales, and visWindowSecs must be the same
+      -->
+	<parameter name="visSignalNames" type="Bzi::BziStringVector" value="[STREAM_1 STREAM_2]" />
+	<parameter name="visMarkerNames" type="Bzi::BziStringVector" value="[EVENT_SHARED_CONTROL]" />
+	
+	<parameter name="visScales" 	type="Bzi::BziDoubleVector"	value="[1000 1000]" />
+	<parameter name="visWindowSecs" type="Bzi::BziDoubleVector"	value="[10 10]" />
+	  
+	<!-- 
+			declare all the signals and events as inputs
+      -->
+    <input name="STREAM_1" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</input>
+    <input name="STREAM_2" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</input>
+    <input name="EVENT_SHARED_CONTROL" type="Bzi::EventStream">
+		<initparameter name="channels" 	value="1"/>
+		<initparameter name="blockSize" value="1"/>
+		<initparameter name="initValue" value="[0]"/>
+    </input>
+</unit>

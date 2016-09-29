@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<unit name="SharedControl" class="SharedControlUnit" type="GenericUnit" xml="">
+    <!-- 
+        SharedControl module.
+           Receives one or more event streams from sensors. Emits events based
+           on the defined model (mapping from event names to integers is in
+           the Python code)
+
+        Parameters:
+            scLocation: full path to the location of the Python modules
+            scModel: full path to the folder containing the model .yaml files
+            scMaxEvents: max number of events that can be produced in one cycle
+            scDebug: true/false to enable/disable debug output
+    -->
+    <parameter name="scLocation" type="Bzi::BziString" value="c:/moregrasp/owndev/mgsharedcontrol"/>
+    <parameter name="scModel" type="Bzi::BziString" value="c:/moregrasp/owndev/demo_sc_hackaton"/>
+    <parameter name="scMaxEvents" type="Bzi::BziInt" value="10"/>
+    <parameter name="scDebug" type="Bzi::BziBool" value="true"/>
+	
+	<output name="EVENT_SHARED_CONTROL" type="Bzi::EventStream">
+		<initparameter name="channels" 	value="10"/>
+		<initparameter name="blockSize" value="1"/>
+		<initparameter name="initValue" value="[0 0 0 0 0 0 0 0 0 0 0]"/>
+	</output>
+	
+	<input name="STREAM_1" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</input>
+	<input name="STREAM_2" type="Bzi::SignalStream">
+		<initparameter name="channels" 		value="3"/>
+		<initparameter name="blockSize" 	value="1"/>
+		<initparameter name="samplingRate" 	value="3"/>
+	</input>
+</unit>
